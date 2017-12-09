@@ -1141,6 +1141,11 @@
             "placeholder": "Distance to one decimal (123.4)",
             "label": "Milestone Position"
         },
+        "monitoring_multi": {
+            "key": "monitoring:",
+            "type": "multiCombo",
+            "label": "Monitoring"
+        },
         "mtb/scale": {
             "key": "mtb:scale",
             "type": "combo",
@@ -1484,18 +1489,6 @@
             "type": "multiCombo",
             "label": "Accepts"
         },
-        "recycling_type": {
-            "key": "recycling_type",
-            "default": "container",
-            "type": "combo",
-            "label": "Recycling Type",
-            "strings": {
-                "options": {
-                    "container": "Container",
-                    "centre": "Recycling Center"
-                }
-            }
-        },
         "ref_aeroway_gate": {
             "key": "ref",
             "type": "text",
@@ -1738,6 +1731,7 @@
             "universal": true,
             "label": "Sources",
             "snake_case": false,
+            "caseSensitive": true,
             "options": [
                 "survey",
                 "local knowledge",

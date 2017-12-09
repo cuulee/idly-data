@@ -14,6 +14,9 @@ export function setLocale(_) {
   }
 }
 
+export function addTranslation(id, value) {
+  translations[id] = value;
+}
 /**
  * Given a string identifier, try to find that string in the current
  * language, and return it.

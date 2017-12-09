@@ -53,6 +53,11 @@ declare module '*/presets.json' {
   export { presets };
 }
 
+declare module '*/en.json' {
+  const en: any;
+  export { en };
+}
+
 declare module '*.json' {
   const value: any;
   export default value;
