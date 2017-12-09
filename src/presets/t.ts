@@ -24,7 +24,7 @@ export function addTranslation(id, value) {
  * @param {string} s string identifier
  * @returns {string?} locale string
  */
-export function t(s: string, o?: any, loc?: any, translation?: any) {
+export function t(s: string, options?: any, loc?: any) {
   loc = loc || currentLocale;
 
   const path = s
@@ -33,22 +33,26 @@ export function t(s: string, o?: any, loc?: any, translation?: any) {
       return ss.replace('<TX_DOT>', '.');
     })
     .reverse();
+  let rep = globalTranslations[loc];
 
-  let rep = globalTranslations[loc] || translation;
+  if (options.dynamicTranslation) {
+    rep = options.dynamicTranslation;
+  }
 
   while (rep !== undefined && path.length) rep = rep[path.pop()];
 
   if (rep !== undefined) {
-    if (o) for (const k in o) rep = rep.replace('{' + k + '}', o[k]);
+    if (options)
+      for (const k in options) rep = rep.replace('{' + k + '}', options[k]);
     return rep;
   }
 
   if (loc !== 'en') {
-    return t(s, o, 'en');
+    return t(s, options, 'en');
   }
 
-  if (o && 'default' in o) {
-    return o.default;
+  if (options && 'default' in options) {
+    return options.default;
   }
 
   const missing = 'Missing ' + loc + ' translation: ' + s;
