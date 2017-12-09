@@ -1,21 +1,21 @@
 /**
  * @REVISIT why does translations exist?
  */
-const translations = Object.create(null);
+const globalTranslations = Object.create(null);
 
 export let currentLocale = 'en';
 export let textDirection = 'ltr';
 
 export function setLocale(_) {
-  if (translations[_] !== undefined) {
+  if (globalTranslations[_] !== undefined) {
     currentLocale = _;
-  } else if (translations[_.split('-')[0]]) {
+  } else if (globalTranslations[_.split('-')[0]]) {
     currentLocale = _.split('-')[0];
   }
 }
 
 export function addTranslation(id, value) {
-  translations[id] = value;
+  globalTranslations[id] = value;
 }
 /**
  * Given a string identifier, try to find that string in the current
@@ -24,7 +24,7 @@ export function addTranslation(id, value) {
  * @param {string} s string identifier
  * @returns {string?} locale string
  */
-export function t(s, o?, loc?) {
+export function t(s: string, o?: any, loc?: any, translation?: any) {
   loc = loc || currentLocale;
 
   const path = s
@@ -34,7 +34,7 @@ export function t(s, o?, loc?) {
     })
     .reverse();
 
-  let rep = translations[loc];
+  let rep = globalTranslations[loc] || translation;
 
   while (rep !== undefined && path.length) rep = rep[path.pop()];
 
