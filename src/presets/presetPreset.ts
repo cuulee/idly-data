@@ -43,19 +43,19 @@ export function presetPreset(id, preset, fields, t = stubT) {
   };
 
   var origName = preset.name || '';
-  preset.name = function() {
+  preset.name = function(options) {
     if (preset.suggestion) {
       id = id.split('/');
       id = id[0] + '/' + id[1];
-      return origName + ' - ' + t('presets.presets.' + id + '.name');
+      return origName + ' - ' + t('presets.presets.' + id + '.name', options);
     }
-    return preset.t('name', { default: origName });
+    return preset.t('name', Object.assign({ default: origName }, options));
   };
 
   var origTerms = (preset.terms || []).join();
-  preset.terms = function() {
+  preset.terms = function(options) {
     return preset
-      .t('terms', { default: origTerms })
+      .t('terms', Object.assign({ default: origTerms }, options))
       .toLowerCase()
       .trim()
       .split(/\s*,+\s*/);

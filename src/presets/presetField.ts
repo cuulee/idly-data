@@ -13,13 +13,16 @@ export function presetField(id, field, t = stubT) {
     return t('presets.fields.' + id + '.' + scope, options);
   };
 
-  field.label = function() {
-    return field.t('label', { default: id });
+  field.label = function(options: any) {
+    return field.t('label', Object.assign({ default: id }, options));
   };
 
   var placeholder = field.placeholder;
-  field.placeholder = function() {
-    return field.t('placeholder', { default: placeholder });
+  field.placeholder = function(options: any) {
+    return field.t(
+      'placeholder',
+      Object.assign({ default: placeholder }, options)
+    );
   };
 
   return field;

@@ -21,8 +21,11 @@ export function presetCategory(id, category, all, t = stubT) {
     return -1;
   };
 
-  category.name = function() {
-    return t('presets.categories.' + id + '.name', { default: id });
+  category.name = function(options: any) {
+    return t(
+      'presets.categories.' + id + '.name',
+      Object.assign({ default: id }, options)
+    );
   };
 
   category.terms = function() {
